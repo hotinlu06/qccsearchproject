@@ -1,0 +1,45 @@
+name: Build Executables
+on: [push]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+      - name: Build Windows EXE
+        run: |
+          pyinstaller --onefile --name CompanyCrawler your_script.py
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: CompanyCrawler_Windows.exe
+          path: dist/CompanyCrawler.exe
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+      - name: Build macOS Executable
+        run: |
+          pyinstaller --onefile --name CompanyCrawler your_script.py
+      - name: Upload macOS Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: CompanyCrawler_macOS
+          path: dist/CompanyCrawler
