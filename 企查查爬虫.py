@@ -15,12 +15,19 @@ from bs4 import BeautifulSoup as bs, BeautifulSoup # type: ignore
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
+from datetime import datetime
+
+# 文件名timestamp (e.g., "20230717_142530" for July 17, 2023, 14:25:30)
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
 
 url = 'https://www.qcc.com/'
 
 # 结果文件路径(自动找desktop)
 desktop_path = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
-result_file_path = os.path.join(desktop_path, 'data0717_01.csv')
+
+result_file_path = os.path.join(desktop_path, f'company_data_{timestamp}.csv')
+# e.g result_file_path = os.path.join(desktop_path, 'data0717_01.csv')
 
 # 参数为搜索关键词，调用时传入即可
 def crawl_company_info(keyword):
@@ -325,10 +332,11 @@ def csv_to_excel_with_highlight(csv_file_path, excel_file_path):
 
 
 if __name__ == '__main__':
-
-    crawl_company_info("汉唐大厦")
+    #输入搜索关键词
+    userinput=input("请输入搜索关键词").strip()
+    crawl_company_info(userinput)
 
     csv_to_excel_with_highlight(
         csv_file_path=result_file_path,
-        excel_file_path=r'data_result/data0717_02.xlsx'
+        excel_file_path = os.path.join(desktop_path, f'company_data_{timestamp}.xlsx')
     )
