@@ -16,7 +16,7 @@ jobs:
           pip install pyinstaller
       - name: Build Windows EXE
         run: |
-          pyinstaller --onefile --name CompanyCrawler your_script.py
+          pyinstaller --onefile --name CompanyCrawler 企查查爬虫.py
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v4  # ✅ Updated to v4
         with:
@@ -37,7 +37,7 @@ jobs:
           pip install pyinstaller
       - name: Build macOS Executable
         run: |
-          pyinstaller --onefile --name CompanyCrawler your_script.py
+          pyinstaller --onefile --name CompanyCrawler 企查查爬虫.py
       - name: Upload macOS Artifact
         uses: actions/upload-artifact@v4  # ✅ Updated to v4
         with:
