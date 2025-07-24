@@ -334,7 +334,7 @@ def csv_to_excel_with_highlight(csv_file_path, excel_file_path):
 
 if __name__ == '__main__':
     #输入搜索关键词
-    userinput=input("请输入搜索关键词").strip()
+    userinput=input("请输入搜索关键词: ").strip()
     crawl_company_info(userinput)
 
     csv_to_excel_with_highlight(
