@@ -41,12 +41,13 @@ def crawl_company_info(keyword):
             pass
 
     fields = [
-         '企业名称', '注册资本', '国标行业', '人员规模', '负责人', '营业场所',
-        '所属地区', '组织机构代码', '经营范围', '登记状态', '企业类型', '统一社会信用代码',
+         '企业名称', '注册资本', '企业类型', '人员规模', '营业场所', '地址变更时间',
+        '地址变更前', '地址变更后', '经营范围', '负责人', '国标行业', '统一社会信用代码',
         '工商注册号', '营业期限', '参保人数', '登记机关', '英文名', '成立日期',
-        '纳税人识别号', '纳税人资质', '核准日期',  '实缴资本',
-        '法定代表人', '分支机构参保人数', '地址变更前', '进出口企业代码', '地址变更后'
+        '纳税人识别号', '纳税人资质', '核准日期',  '实缴资本', '进出口企业代码',
+        '法定代表人', '分支机构参保人数',  '组织机构代码', '所属地区', '登记状态'
     ]
+    
     df = pd.DataFrame(columns=fields)
     pd.DataFrame(columns=fields).to_csv(result_file_path, index=False, encoding='utf-8')
 
@@ -193,10 +194,12 @@ def crawl_company_info(keyword):
                             # 将地址变更信息结构化
                             for row in address_change_data:
                                 if len(row) >= 4 and '地址' in row[2]:
+                                    change_time = row[1]
                                     address_old = row[3]
                                     address_new = row[4]
 
                                     # 最新的数据排在越前面，只需遍历第一个即可
+                                    row_data['地址变更时间'] = change_time
                                     row_data['地址变更前'] = address_old
                                     row_data['地址变更后'] = address_new
                                     break
@@ -244,7 +247,6 @@ def crawl_company_info(keyword):
 
     finally:
         driver.quit()
-
 
 
 def csv_to_excel_with_highlight(csv_file_path, excel_file_path):
