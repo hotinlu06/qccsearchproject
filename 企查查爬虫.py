@@ -41,8 +41,8 @@ def crawl_company_info(keyword):
             pass
 
     fields = [
-         '企业名称', '注册资本', '国标行业', '统一社会信用代码', '负责人', '组织机构代码',
-        '所属地区', '营业场所', '经营范围', '登记状态', '企业类型', '人员规模',
+         '企业名称', '注册资本', '国标行业', '人员规模', '负责人', '营业场所',
+        '所属地区', '组织机构代码', '经营范围', '登记状态', '企业类型', '统一社会信用代码',
         '工商注册号', '营业期限', '参保人数', '登记机关', '英文名', '成立日期',
         '纳税人识别号', '纳税人资质', '核准日期',  '实缴资本',
         '法定代表人', '分支机构参保人数', '地址变更前', '进出口企业代码', '地址变更后'
@@ -53,7 +53,6 @@ def crawl_company_info(keyword):
     options = webdriver.ChromeOptions()
     # options.add_argument("--headless=new")
     # options.add_argument("--start-minimized")
-    # service = Service(r'C:\Users\HTJ\Desktop\py_file\chrome_driver\chromedriver.exe')
     # driver = webdriver.Chrome(options=options, service=service)
     # service = Service(executable_path="chromedriver") (manual installation for chromedriver)
     # Autodownload chromedriver
@@ -63,13 +62,13 @@ def crawl_company_info(keyword):
     time.sleep(2)
 
     # 登录账号
-    login_button = WebDriverWait(driver, 30).until(
+    login_button = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, "button.qccd-btn.qccd-btn-primary.qcc-header-login-btn"))
     )
     login_button.click()
 
-    print("请30s内扫码登录")
-    time.sleep(30)
+    print("请60s内扫码登录")
+    time.sleep(60)
     driver.refresh()
 
 
