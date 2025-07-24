@@ -18,9 +18,7 @@ from openpyxl.styles import PatternFill
 
 url = 'https://www.qcc.com/'
 
-# 结果文件路径(需更改)
-#result_file_path = r'data_result/data0717_01.csv'
-
+# 结果文件路径(自动找desktop)
 desktop_path = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
 result_file_path = os.path.join(desktop_path, 'data0717_01.csv')
 
@@ -49,7 +47,9 @@ def crawl_company_info(keyword):
     # options.add_argument("--start-minimized")
     # service = Service(r'C:\Users\HTJ\Desktop\py_file\chrome_driver\chromedriver.exe')
     # driver = webdriver.Chrome(options=options, service=service)
-    service = Service(executable_path="chromedriver")
+    # service = Service(executable_path="chromedriver") (manual installation for chromedriver)
+    # Autodownload chromedriver
+    service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(options=options)
     driver.get(url)
     time.sleep(2)
