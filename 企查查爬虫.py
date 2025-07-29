@@ -67,10 +67,10 @@ def crawl_company_info(keyword):
 
 ##windows
         
-    options = webdriver.ChromeOptions()
-    options.add_argument('--ignore-certificate-errors')  # 👈 Critical for Windows
-    options.add_argument('--allow-running-insecure-content')
-    options.add_argument('--disable-extensions')
+   # options = webdriver.ChromeOptions()
+    #options.add_argument('--ignore-certificate-errors')  # 👈 Critical for Windows
+    #options.add_argument('--allow-running-insecure-content')
+    #options.add_argument('--disable-extensions')
 
 # Add these for corporate networks
     options.add_argument('--proxy-server="direct://"')
