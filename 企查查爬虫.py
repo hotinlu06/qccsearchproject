@@ -227,7 +227,7 @@ def crawl_company_info(keyword):
                                 )
                             else:
                                 print(f"跳过: {row_data.get('企业名称')} (状态: {row_data.get('登记状态')})")
-                            time.sleep(random.uniform(2, 4))
+                            time.sleep(random.uniform(0.5, 1.5))
 
                         except Exception as e:
                             print(f"公司信息爬取错误：{str(e)}")
@@ -350,8 +350,8 @@ def csv_to_excel_with_highlight(csv_file_path, excel_file_path):
 if __name__ == '__main__':
     #输入搜索关键词
     userinput=input("请输入搜索关键词: ").strip()
-    capitalreq=input("注册资金大于标准（万）标黄：").strip()
-    employeereq=input("员工数量大于（人数）标黄：").strip()
+    capitalreq=int(input("注册资金大于标准（万）标黄："))
+    employeereq=int(input("员工数量大于（人数）标黄："))
     print("公司地址近期有变更标绿")
     crawl_company_info(userinput)
 
