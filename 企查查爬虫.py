@@ -98,14 +98,16 @@ def crawl_company_info(keyword):
 
         # 翻页遍历
         try:
-            # 获取总页数
-            element = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, "//ul[@class='pagination']/li[last()-1]/a"))
-            )
-            text = element.text
-
-            total_pages = int(re.search(r'\d+', text).group())
-            print(f"一共 {total_pages} 页！")
+    # 获取总页数（带错误处理）
+            try:
+                element = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, "//ul[@class='pagination']/li[last()-1]/a"))
+                )
+                total_pages = int(re.search(r'\d+', element.text).group())
+                print(f"一共 {total_pages} 页！")
+            except Exception as e:
+                total_pages = 1
+                print(f"未找到分页控件，默认处理为1页。错误: {str(e)}")        
 
             for page in range(1, total_pages + 1):
                 print(f"正在遍历第 {page} 页")
