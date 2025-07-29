@@ -277,7 +277,7 @@ def csv_to_excel_with_highlight(csv_file_path, excel_file_path):
 
         # 定义颜色填充
         yellow_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
-        green_fill = PatternFill(start_color="00FF00", end_color="00FF00", fill_type="solid")
+        green_fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
 
         # 获取列名所在的行号（通常是第一行）
         header_row = 1
