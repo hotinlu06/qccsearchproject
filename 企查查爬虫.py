@@ -64,6 +64,19 @@ def crawl_company_info(keyword):
     # driver = webdriver.Chrome(options=options, service=service)
     # service = Service(executable_path="chromedriver") (manual installation for chromedriver)
     # Autodownload chromedriver
+
+##windows
+        
+    options = webdriver.ChromeOptions()
+    options.add_argument('--ignore-certificate-errors')  # 👈 Critical for Windows
+    options.add_argument('--allow-running-insecure-content')
+    options.add_argument('--disable-extensions')
+
+# Add these for corporate networks
+    options.add_argument('--proxy-server="direct://"')
+    options.add_argument('--proxy-bypass-list=*')
+
+    
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(options=options)
     driver.get(url)
