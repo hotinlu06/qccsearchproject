@@ -352,7 +352,8 @@ if __name__ == '__main__':
     userinput=input("请输入搜索关键词: ").strip()
     capitalreq=int(input("注册资金大于标准（万）标黄："))
     employeereq=int(input("员工数量大于（人数）标黄："))
-    print("公司地址近期有变更标绿")
+    print("-----------------")
+    print("公司地址近期有变更为绿色高亮")
     crawl_company_info(userinput)
 
     csv_to_excel_with_highlight(
