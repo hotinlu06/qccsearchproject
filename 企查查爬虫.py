@@ -128,7 +128,7 @@ def crawl_company_info(keyword):
                         main_window = driver.current_window_handle
 
                         company.click()
-                        time.sleep(random.uniform(2, 4))
+                        time.sleep(random.uniform(0.5, 1.5))
 
                         # 等待新窗口加载
                         WebDriverWait(driver, 10).until(EC.number_of_windows_to_be(2))
@@ -239,7 +239,7 @@ def crawl_company_info(keyword):
                                 driver.close()
                             driver.switch_to.window(main_window)
 
-                            time.sleep(random.uniform(2, 3))
+                            time.sleep(random.uniform(1, 1.5))
 
                 except Exception as e:
                     print(f"公司遍历错误：{str(e)}")
