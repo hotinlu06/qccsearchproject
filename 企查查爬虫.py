@@ -40,12 +40,19 @@ def crawl_company_info(keyword):
         with open(result_file_path, 'w', newline='', encoding='utf-8') as f:
             pass
 
+#    fields = [
+ #        '企业名称', '注册资本', '企业类型', '人员规模', '营业场所', '地址变更时间',
+  #      '地址变更前', '地址变更后', '经营范围', '负责人', '国标行业', '统一社会信用代码',
+   #     '工商注册号', '营业期限', '参保人数', '登记机关', '英文名', '成立日期',
+    #    '纳税人识别号', '纳税人资质', '核准日期',  '实缴资本', '进出口企业代码',
+     #   '法定代表人', '分支机构参保人数',  '组织机构代码', '所属地区', '登记状态'
+    #]
+
     fields = [
-         '企业名称', '注册资本', '企业类型', '人员规模', '营业场所', '地址变更时间',
-        '地址变更前', '地址变更后', '经营范围', '负责人', '国标行业', '统一社会信用代码',
-        '工商注册号', '营业期限', '参保人数', '登记机关', '英文名', '成立日期',
-        '纳税人识别号', '纳税人资质', '核准日期',  '实缴资本', '进出口企业代码',
-        '法定代表人', '分支机构参保人数',  '组织机构代码', '所属地区', '登记状态'
+         '企业名称', '注册资本', '人员规模', '营业场所', '地址变更时间',
+        '地址变更前', '地址变更后', '经营范围', '负责人', '国标行业',
+        '营业期限', '参保人数', '登记机关', '英文名', '成立日期',
+        '核准日期',  '实缴资本', '法定代表人', '分支机构参保人数', '所属地区', '登记状态'
     ]
     
     df = pd.DataFrame(columns=fields)
@@ -205,14 +212,17 @@ def crawl_company_info(keyword):
                                     break
 
                             # 写入文件
-                            pd.DataFrame([row_data]).to_csv(
-                                result_file_path,
-                                mode='a',
-                                header=False,
-                                index=False,
-                                encoding='utf-8'
-                            )
 
+                            if str(row_data.get('登记状态', '')).startswith('存续'):
+                                pd.DataFrame([row_data]).to_csv(
+                                    result_file_path,
+                                    mode='a',
+                                    header=False,
+                                    index=False,
+                                    encoding='utf-8'
+                                )
+                            else:
+                                print(f"跳过: {row_data.get('企业名称')} (状态: {row_data.get('登记状态')})")
                             time.sleep(random.uniform(2, 4))
 
                         except Exception as e:
