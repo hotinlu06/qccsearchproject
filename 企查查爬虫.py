@@ -79,7 +79,7 @@ def crawl_company_info(keyword):
     time.sleep(60)
     driver.refresh()
 
-    driver.minimize_window()
+
 
 
     # 关键词搜索
@@ -321,7 +321,7 @@ def csv_to_excel_with_highlight(csv_file_path, excel_file_path):
                     cap_match = re.search(r"(\d+(\.\d+)?)万元", str(capital_val))
                     if cap_match:
                         capital_num = float(cap_match.group(1)) * 10000  # 转换为元
-                        capital_over = capital_num > capitalreq  # 判断是否超500万（元）
+                        capital_over = capital_num > capitalreq * 10000  # 判断是否超500万（元）
 
                 # 处理参保人数
                 employee_val = ws.cell(row=row, column=employee_col).value
@@ -350,8 +350,8 @@ def csv_to_excel_with_highlight(csv_file_path, excel_file_path):
 if __name__ == '__main__':
     #输入搜索关键词
     userinput=input("请输入搜索关键词: ").strip()
-    capitalreq=input("注册资金大于标准（万）标黄").strip()
-    employeereq=input("员工数量大于（人数）标黄").strip()
+    capitalreq=input("注册资金大于标准（万）标黄：").strip()
+    employeereq=input("员工数量大于（人数）标黄：").strip()
     print("公司地址近期有变更标绿")
     crawl_company_info(userinput)
 
