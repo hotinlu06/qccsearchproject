@@ -10,7 +10,10 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-# from webdriver_manager.chrome import ChromeDriverManager
+
+# Delete when running local and put Chromedriver in same folder as script
+from webdriver_manager.chrome import ChromeDriverManager
+
 import os
 from bs4 import BeautifulSoup as bs, BeautifulSoup # type: ignore
 import pandas as pd
@@ -67,8 +70,13 @@ def crawl_company_info(keyword):
     # options.add_argument("--headless=new")
     # options.add_argument("--start-minimized")
     # driver = webdriver.Chrome(options=options, service=service)
-    service = Service(executable_path="chromedriver")
+
+    # Manual installation (local)
+    #service = Service(executable_path="chromedriver")
+    
     # Autodownload chromedriver
+    service = Service(ChromeDriverManager().install())
+    
     driver = webdriver.Chrome(options=options)
     driver.get(url)
     time.sleep(2)
